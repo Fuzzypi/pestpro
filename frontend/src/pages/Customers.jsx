@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Papa from 'papaparse';
 import { Plus, Search, Edit, Trash2, Mail, MapPin, UploadCloud } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 
-const API_URL = 'http://localhost:5000';
+import { API_URL } from '../lib/api';
+
 
 const Customers = ( ) => {
   const [customers, setCustomers] = useState([]);
@@ -20,6 +22,8 @@ const Customers = ( ) => {
   const [uploadFile, setUploadFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [uploadResult, setUploadResult] = useState(null);
+
+  const navigate = useNavigate();
 
   const fetchCustomers = async (source) => {
     console.log(`DEBUG: Fetching customers, initiated by: ${source}`);
@@ -247,8 +251,23 @@ const Customers = ( ) => {
                   return null;
                 }
                 return (
-                  <tr key={customer.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{customer.name}</td>
+                  <tr
+                    key={customer.id}
+                    className="hover:bg-gray-50 cursor-pointer"
+                    onClick={() => navigate(`/customers/${customer.id}`)}
+                    onKeyDown={(e) => { if (e.key === 'Enter') navigate(`/customers/${customer.id}`); }}
+                    tabIndex={0}
+                  >
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <Link
+                        to={`/customers/${customer.id}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="text-indigo-700 hover:underline"
+                        title="View customer details"
+                      >
+                        {customer.name}
+                      </Link>
+                    </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900 flex items-center">
                           <Mail size={12} className="mr-2 text-gray-400"/> {customer.email || 'N/A'}
@@ -261,6 +280,7 @@ const Customers = ( ) => {
                           href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(customer.address )}`}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
                           className="text-indigo-600 hover:text-indigo-800 hover:underline flex items-center"
                           title="Click to open in Google Maps"
                         >
@@ -272,10 +292,18 @@ const Customers = ( ) => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex space-x-4">
-                        <button onClick={() => openModalForEdit(customer)} className="text-indigo-600 hover:text-indigo-900 flex items-center">
+                        <button
+                          onClick={(e) => { e.stopPropagation(); openModalForEdit(customer); }}
+                          className="text-indigo-600 hover:text-indigo-900 flex items-center"
+                          title="Edit customer"
+                        >
                           <Edit size={14} className="mr-1" /> Edit
                         </button>
-                        <button onClick={() => handleDeleteCustomer(customer.id)} className="text-red-600 hover:text-red-900 flex items-center">
+                        <button
+                          onClick={(e) => { e.stopPropagation(); handleDeleteCustomer(customer.id); }}
+                          className="text-red-600 hover:text-red-900 flex items-center"
+                          title="Delete customer"
+                        >
                           <Trash2 size={14} className="mr-1" /> Delete
                         </button>
                       </div>
@@ -374,7 +402,7 @@ const Customers = ( ) => {
                     {uploadResult.errors && uploadResult.errors.length > 0 && (
                         <ul className="mt-2 list-disc list-inside text-sm text-red-600">
                             {uploadResult.errors.map((err, index) => (
-                                <li key={index}>{err.data.name || 'Unknown Row'}: {err.error}</li>
+                                <li key={index}>{err.data?.name || 'Unknown Row'}: {err.error}</li>
                             ))}
                         </ul>
                     )}

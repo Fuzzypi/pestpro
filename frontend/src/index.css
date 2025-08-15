@@ -1,3 +1,99 @@
+/* frontend/src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ---------- Base (light + dark) ---------- */
+@layer base {
+  html { @apply h-full; }
+  body {
+    @apply min-h-screen antialiased
+           bg-gray-50 text-gray-900
+           dark:bg-gray-950 dark:text-white;
+  }
+
+  /* Make links blue in both themes, brighter in dark */
+  a {
+    @apply underline-offset-2
+           text-indigo-600 hover:text-indigo-700
+           dark:text-indigo-400 dark:hover:text-indigo-300;
+  }
+}
+
+/* ---------- Reusable components ---------- */
+@layer components {
+  /* Card shell used everywhere (ensure DARK background + WHITE text) */
+  .card {
+    @apply rounded-xl border shadow-card
+           border-gray-200 bg-white text-gray-900
+           dark:border-gray-800 dark:bg-gray-900 dark:text-white;
+  }
+
+  /* Inputs: <input>, <select>, <textarea> */
+  .input {
+    @apply w-full rounded-lg
+           border border-gray-300 bg-white
+           px-3 py-2 text-sm text-gray-900 placeholder-gray-400
+           outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500
+           dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder-gray-500;
+  }
+  select.input { @apply pr-8; }
+  textarea.input { @apply resize-y; }
+
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center gap-2
+           rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white
+           shadow hover:bg-indigo-700
+           focus:outline-none focus:ring-2 focus:ring-indigo-500
+           disabled:opacity-50
+           dark:bg-indigo-500 dark:hover:bg-indigo-600;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2
+           rounded-lg border px-4 py-2 text-sm font-medium shadow-sm
+           border-gray-300 bg-white text-gray-700 hover:bg-gray-50
+           focus:outline-none focus:ring-2 focus:ring-indigo-500
+           disabled:opacity-50
+           dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center gap-2
+           rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white
+           hover:bg-red-700
+           focus:outline-none focus:ring-2 focus:ring-red-500
+           disabled:opacity-50;
+  }
+
+  /* Pills / badges */
+  .pill {
+    @apply inline-flex items-center rounded-full
+           px-2.5 py-0.5 text-xs font-medium
+           bg-gray-100 text-gray-800
+           dark:bg-gray-800 dark:text-white;
+  }
+
+  /* Tables */
+  .table-th {
+    @apply px-6 py-3 text-left text-xs font-medium uppercase tracking-wider
+           text-gray-500
+           dark:text-white;
+  }
+  .table-td {
+    @apply px-6 py-3 text-sm
+           text-gray-700
+           dark:text-white;
+  }
+
+  /* Table container surfaces */
+  .table-surface {
+    @apply bg-white divide-y divide-gray-200
+           dark:bg-gray-900 dark:divide-gray-800;
+  }
+  .table-head {
+    @apply bg-gray-50
+           dark:bg-gray-800;
+  }
+}

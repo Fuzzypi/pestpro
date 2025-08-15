@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../lib/auth'; // We will use the login function from our auth context
 
-const API_URL = 'http://localhost:5000';
+import { API_URL } from '../lib/api';
+
 
 const Login = ( ) => {
   const [email, setEmail] = useState('');

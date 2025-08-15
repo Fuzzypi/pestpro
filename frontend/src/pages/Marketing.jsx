@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Make sure axios is imported
 import { Mail, MessageSquare, Share2, Plus, Zap, TrendingUp, Users, Eye } from 'lucide-react';
 
-const API_URL = 'http://localhost:5000'; // Define API URL
+import { API_URL } from '../lib/api';
+ // Define API URL
 
 const Marketing = ( ) => {
   const [campaigns, setCampaigns] = useState([]);

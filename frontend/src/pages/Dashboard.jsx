@@ -4,7 +4,8 @@ import { useAuth } from '../lib/auth';
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Users, Calendar, DollarSign, Archive, CheckCircle, Clock, PlusCircle } from 'lucide-react';
 
-const API_URL = 'http://localhost:5000';
+import { API_URL } from '../lib/api';
+
 
 // --- Reusable Stat Card Component ---
 const StatCard = ({ title, value, icon, subtext } ) => (

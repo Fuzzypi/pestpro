@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Package, Plus, AlertTriangle, TrendingDown, Search, Filter } from 'lucide-react';
 import axios from 'axios'; // <-- Make sure axios is imported
 
-const API_URL = 'http://localhost:5000'; // <-- Define the API URL
+import { API_URL } from '../lib/api';
+ // <-- Define the API URL
 
 const Inventory = ( ) => {
   const [products, setProducts] = useState([]);

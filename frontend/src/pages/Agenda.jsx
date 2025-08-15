@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Calendar } from 'lucide-react';
 
-const API_URL = 'http://localhost:5000';
+import { API_URL } from '../lib/api';
+
 
 // Helper to get today's date in YYYY-MM-DD format
 const getTodayString = ( ) => {

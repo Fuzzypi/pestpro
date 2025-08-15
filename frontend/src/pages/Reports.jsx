@@ -3,7 +3,8 @@ import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
 import { FileText, TrendingUp, Users, PieChart as PieIcon } from 'lucide-react';
 
-const API_URL = 'http://localhost:5000';
+import { API_URL } from '../lib/api';
+
 
 const Reports = ( ) => {
   const [reportData, setReportData] = useState(null);

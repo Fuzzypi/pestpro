@@ -4,7 +4,8 @@ import FullCalendar from '@fullcalendar/react';
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import interactionPlugin from '@fullcalendar/interaction';
 
-const API_URL = 'http://localhost:5000';
+import { API_URL } from '../lib/api';
+
 
 const Schedule = ( ) => {
   const [events, setEvents] = useState([]);

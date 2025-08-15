@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Users, Plus, Edit, Trash2, Calendar, Copy } from 'lucide-react';
 
-const API_URL = 'http://localhost:5000';
+import { API_URL } from '../lib/api';
+
 
 const Settings = ( ) => {
   const [users, setUsers] = useState([]);
